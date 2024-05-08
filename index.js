@@ -1,9 +1,16 @@
-const pullAtIndex = (arr, pullArr) => {
-  let removed = [];
-  let pulled = arr
-    .map((v, i) => (pullArr.includes(i) ? removed.push(v) : v))
-    .filter((v, i) => !pullArr.includes(i));
-  arr.length = 0;
-  pulled.forEach((v) => arr.push(v));
-  return removed;
-};
+function longestPalindrome(s) {
+  const map = new Map();
+  let hasOdd = false;
+  let result = 0;
+  for (const char of s) {
+    map.set(char, (map.get(char) || 0) + 1);
+  }
+  for (const count of map.values()) {
+    if (count % 2 === 0) result += count;
+    else {
+      result += count - 1;
+      hasOdd = true;
+    }
+  }
+  return hasOdd ? result + 1 : result;
+}
